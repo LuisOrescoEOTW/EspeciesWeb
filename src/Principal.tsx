@@ -32,9 +32,8 @@ export const Principal = () => {
 
         <div className="item-grid">
           <div
-            className={`boton-wrapper ${
-              select === "todos" ? "boton-wrapper-select" : ""
-            }`}
+            className={`boton-wrapper ${select === "todos" ? "boton-wrapper-select" : ""
+              }`}
           >
             <img
               src={todos}
@@ -47,9 +46,8 @@ export const Principal = () => {
 
         <div className="item-grid">
           <div
-            className={`boton-wrapper ${
-              select === "animalia" ? "boton-wrapper-select" : ""
-            }`}
+            className={`boton-wrapper ${select === "animalia" ? "boton-wrapper-select" : ""
+              }`}
           >
             <img
               src={animalia}
@@ -62,9 +60,8 @@ export const Principal = () => {
 
         <div className="item-grid">
           <div
-            className={`boton-wrapper ${
-              select === "fungi" ? "boton-wrapper-select" : ""
-            }`}
+            className={`boton-wrapper ${select === "fungi" ? "boton-wrapper-select" : ""
+              }`}
           >
             <img
               src={fungi}
@@ -77,9 +74,8 @@ export const Principal = () => {
 
         <div className="item-grid">
           <div
-            className={`boton-wrapper ${
-              select === "plantae" ? "boton-wrapper-select" : ""
-            }`}
+            className={`boton-wrapper ${select === "plantae" ? "boton-wrapper-select" : ""
+              }`}
           >
             <img
               src={plantae}
@@ -106,15 +102,15 @@ export const Principal = () => {
 
       {/* Pie de página */}
       <div className="pie-grid">
-        <div className="pie-grid-item">
-          <img src={logoUni} alt="logoUni" />
+        <div className="pie">
+          {/* <img src={logoUni} alt="logoUni" /> */}
         </div>
         <div className="pie">
           <Person /> Orescovich Luis
         </div>
         <div className="pie">
           <LocationOn />
-          Ushuaia TDF
+          Ushuaia UNTDF
         </div>
         <div className="pie">
           <Edit /> Laboratorio de Software

@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
 .contenedor-grid {
   font-family: "Nunito", sans-serif;
@@ -46,6 +51,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  /* padding: 5%; */
 }
 
 .boton-wrapper {
@@ -60,7 +66,7 @@
   position: relative;
   text-align: center;
   width: 100%;
-  min-height: 20vh;
+  /* min-height: 20vh; */
 
   background-image: url("./images/fondo.svg");
   background-size: cover;
@@ -84,7 +90,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
-  height: 100%;
+  /* height: 5%; */
   background-color: gray;
   color: antiquewhite;
 }
@@ -96,7 +102,7 @@
 
 .pie-grid-item img {
   width: 10%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 
@@ -118,3 +124,4 @@
   height: 100%;
   border: 1px solid red;
 }
+
