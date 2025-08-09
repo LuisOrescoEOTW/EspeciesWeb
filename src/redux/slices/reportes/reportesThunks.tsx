@@ -9,3 +9,11 @@ export const getReportes = () => {
     dispatch(setReportes({ reportes: data}));
   };
 };
+
+//Reportes Filtro por Reino y Todos
+export const getReportesByReinoTodos = (reino: string) => {
+  return async (dispatch: AppDispatch) => {
+    const { data } = await(Api.get(`/reportes/GetByReinoTodos/${reino}`));
+    dispatch(setReportes({ reportes: data}));
+  };
+};

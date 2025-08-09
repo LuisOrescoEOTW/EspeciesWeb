@@ -1,11 +1,11 @@
 export interface Iespecies {
   sp_id: number;
-  reino: String;
-  phydiv: String;
-  clase: String;
-  orden: String;
-  familia: String;
-  nombre_cientifico: String;
-  origen: String;
-  imagen: String;
+  reino: string;
+  phydiv: string;
+  clase: string;
+  orden: string;
+  familia: string;
+  nombre_cientifico: string;
+  origen: string;
+  imagen: string;
 }

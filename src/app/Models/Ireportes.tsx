@@ -4,9 +4,9 @@ export interface Ireportes {
   id: number; 
   latitud: number;
   longitud: number;
-  fecha: String;
-  hora: String;
-  descripcion: String;
-  imagen: String;
+  fecha: string;
+  hora: string;
+  descripcion: string;
+  imagen: string;
   especie: Iespecies;
 }

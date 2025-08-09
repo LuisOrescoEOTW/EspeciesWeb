@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Principal } from './Principal'
+import { Principal } from './app/Pages/Principal'
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 

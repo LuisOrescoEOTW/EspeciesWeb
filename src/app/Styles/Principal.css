@@ -10,9 +10,10 @@ html, body, #root {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   width: 100%;
-  height: 10vh;
+  /* height: 10vh; */
   background-color: black;
   color: antiquewhite;
+  align-content: center;
 }
 
 .decoracion {
@@ -26,8 +27,8 @@ html, body, #root {
 
 .boton-imagen {
   cursor: pointer;
-  width: 150px;
-  height: 50px;
+  width: 120px;
+  /* height: 50px; */
   transition: transform 0.2s ease;
   border-radius: 20%;
 }
@@ -42,7 +43,7 @@ html, body, #root {
 }
 
 .guardaparque img {
-  height: 80%;
+  height: 50%;
   object-fit: contain;
 }
 
@@ -51,7 +52,8 @@ html, body, #root {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* padding: 5%; */
+  padding: 4%;
+  /* margin: 5%; */
 }
 
 .boton-wrapper {
@@ -59,16 +61,18 @@ html, body, #root {
 }
 
 .boton-wrapper-select {
-  border-bottom: 5px solid red;
+  border-bottom: 3px solid red;
+  border-radius: 20%;
 }
 
 .titulo {
   position: relative;
   text-align: center;
   width: 100%;
+  box-sizing: border-box;
   /* min-height: 20vh; */
 
-  background-image: url("./images/fondo.svg");
+  background-image: url("../Images/fondo.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,6 +94,7 @@ html, body, #root {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
+  box-sizing: border-box;
   /* height: 5%; */
   background-color: gray;
   color: antiquewhite;
@@ -101,27 +106,44 @@ html, body, #root {
 }
 
 .pie-grid-item img {
-  width: 10%;
+  width: 100%;
   /* height: 100%; */
 }
 
 
 .tarjeta {
-  display: flex; /* Agrupa en fila */
+  display: block;
   width: 100%;
-  height: 63vh;
-  border: 1px solid red;
+  height: auto;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  /* box-sizing: border-box; */
+  /* height: 63vh; */
+  /* border: 1px solid red; */
 }
 
 .tarjeta-filtro {
   width: 10%;
   height: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .tarjeta-contenido {
   width: 90%;
   height: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
