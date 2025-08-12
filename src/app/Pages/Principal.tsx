@@ -16,6 +16,8 @@ import { getEspecies, getEspeciesByReinoTodos } from "../../redux/slices/especie
 import { AppBar, BottomNavigation, BottomNavigationAction, Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Modal, Paper, Tab, TablePagination, Tabs, Typography, useTheme } from "@mui/material";
 import { getReportes, getReportesByReinoTodos } from "../../redux/slices/reportes/reportesThunks";
 import { PrincipalModal } from "../Components/PrincipalModal";
+import type { Iespecies } from "../Models/Iespecies";
+import type { Ireportes } from "../Models/Ireportes";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -155,13 +157,23 @@ export const Principal = () => {
 
   //Clase Modal
   const [open, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedEspecie, setSelectedEspecie] = useState<Iespecies | null>(null);
+  const [selectedReporte, setSelectedReporte] = useState<Ireportes | null>(null);
   const handleOpen = (item: any) => {
-    setSelectedItem(item);
+    if (item.latitud) {
+      // REPORTES
+      setSelectedEspecie(item.especie);
+      setSelectedReporte(item);
+    } else {
+      // ESPECIES
+      setSelectedEspecie(item);
+      setSelectedReporte(null);
+    }
     setOpen(true);
   }
   const handleClose = () => {
-    setSelectedItem(null);
+    setSelectedEspecie(null);
+    setSelectedReporte(null);
     setOpen(false);
   }
 
@@ -312,7 +324,7 @@ export const Principal = () => {
         open={open}
         onClose={handleClose}
       >
-        <PrincipalModal item={selectedItem}/>
+        <PrincipalModal especie={selectedEspecie} reporte={selectedReporte}/>
       </Modal>
     </>
 
