@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+# yarn install
+
 # Ejecutar: yarn run dev
 
 # Puerto 8000
