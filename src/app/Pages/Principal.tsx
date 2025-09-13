@@ -6,15 +6,40 @@ import todos from "../Images/Todos.png";
 import animalia from "../Images/Animalia.png";
 import fungi from "../Images/Fungi.png";
 import plantae from "../Images/Plantae.png";
-import noImage from '../Images/noImage.jpg';
+import noImage from "../Images/noImage.jpg";
 
 import { useEffect, useState } from "react";
 import { Edit, LocationOn, Person, School } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/store";
-import { getEspecies, getEspeciesByReinoTodos } from "../../redux/slices/especies/especiesThunks";
-import { AppBar, BottomNavigation, BottomNavigationAction, Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Modal, Paper, Tab, TablePagination, Tabs, Typography, useTheme } from "@mui/material";
-import { getReportes, getReportesByReinoTodos } from "../../redux/slices/reportes/reportesThunks";
+import {
+  getEspecies,
+  getEspeciesByReinoTodos,
+} from "../../redux/slices/especies/especiesThunks";
+import {
+  AppBar,
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Modal,
+  Paper,
+  Tab,
+  TablePagination,
+  Tabs,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import {
+  getReportes,
+  getReportesByReinoTodos,
+} from "../../redux/slices/reportes/reportesThunks";
 import { PrincipalModal } from "../Components/PrincipalModal";
 import type { Iespecies } from "../Models/Iespecies";
 import type { Ireportes } from "../Models/Ireportes";
@@ -48,7 +73,7 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
 
@@ -65,13 +90,13 @@ export const Principal = () => {
   useEffect(() => {
     dispatch(getEspecies());
     dispatch(getReportes());
-  }, [])
-
+  }, []);
 
   // Selecciono Contenido de Especies
   const [select, setSelect] = useState<string>("TODOS");
   const handleClick = (a: string) => {
     setSelect(a);
+    setPage(0);
     dispatch(getEspeciesByReinoTodos(a));
     dispatch(getReportesByReinoTodos(a));
   };
@@ -81,20 +106,28 @@ export const Principal = () => {
   const [value, setValue] = useState(0);
   const pageChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setPage(0);
   };
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(4); // cantidad inicial por página
+  const [rowsPerPage, setRowsPerPage] = useState(4);
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   //Cargar las tablas segun opcion
-  const cargarTabla = (imagen: string, nombre: string, index: number, item: any) => {
+  const cargarTabla = (
+    imagen: string,
+    nombre: string,
+    index: number,
+    item: any
+  ) => {
     return (
       <Grid key={index} size={{ xs: 12, sm: 6, md: 3 }}>
         <Card
@@ -104,7 +137,7 @@ export const Principal = () => {
             color: "#ffffff",
             boxShadow: 20,
             borderRadius: 2,
-            border: "3px solid #ffffff"
+            border: "3px solid #ffffff",
           }}
         >
           <CardActionArea onClick={() => handleOpen(item)}>
@@ -120,12 +153,12 @@ export const Principal = () => {
                 variant="h6"
                 component="div"
                 sx={{
-                  height: '3rem',
+                  height: "3rem",
                   lineHeight: 1,
-                  overflow: 'hidden',
-                  display: '-webkit-box',
+                  overflow: "hidden",
+                  display: "-webkit-box",
                   WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
+                  WebkitBoxOrient: "vertical",
                 }}
               >
                 {nombre}
@@ -133,32 +166,41 @@ export const Principal = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={() => handleOpen(item)}>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => handleOpen(item)}
+            >
               Detalle
             </Button>
           </CardActions>
         </Card>
       </Grid>
-    )
-  }
+    );
+  };
+
   const tablaPagination = () => {
     return (
       <TablePagination
         component="div"
-        count={especies.length}
+        count={value === 0 ? especies.length : reportes.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         rowsPerPageOptions={[4, 8, 12, 16]}
       />
-    )
-  }
+    );
+  };
 
   //Clase Modal
   const [open, setOpen] = useState(false);
-  const [selectedEspecie, setSelectedEspecie] = useState<Iespecies | null>(null);
-  const [selectedReporte, setSelectedReporte] = useState<Ireportes | null>(null);
+  const [selectedEspecie, setSelectedEspecie] = useState<Iespecies | null>(
+    null
+  );
+  const [selectedReporte, setSelectedReporte] = useState<Ireportes | null>(
+    null
+  );
   const handleOpen = (item: any) => {
     if (item.latitud) {
       // REPORTES
@@ -170,18 +212,17 @@ export const Principal = () => {
       setSelectedReporte(null);
     }
     setOpen(true);
-  }
+  };
   const handleClose = () => {
     setSelectedEspecie(null);
     setSelectedReporte(null);
     setOpen(false);
-  }
+  };
 
   return (
     <>
       <div className="page-container">
         <div className="content-wrap">
-
           {/* Encabezado con botones */}
           <div className="contenedor-grid">
             <div className="item-grid">
@@ -194,8 +235,9 @@ export const Principal = () => {
 
             <div className="item-grid">
               <div
-                className={`boton-wrapper ${select === "TODOS" ? "boton-wrapper-select" : ""
-                  }`}
+                className={`boton-wrapper ${
+                  select === "TODOS" ? "boton-wrapper-select" : ""
+                }`}
               >
                 <img
                   src={todos}
@@ -208,8 +250,9 @@ export const Principal = () => {
 
             <div className="item-grid">
               <div
-                className={`boton-wrapper ${select === "ANIMALIA" ? "boton-wrapper-select" : ""
-                  }`}
+                className={`boton-wrapper ${
+                  select === "ANIMALIA" ? "boton-wrapper-select" : ""
+                }`}
               >
                 <img
                   src={animalia}
@@ -222,8 +265,9 @@ export const Principal = () => {
 
             <div className="item-grid">
               <div
-                className={`boton-wrapper ${select === "FUNGI" ? "boton-wrapper-select" : ""
-                  }`}
+                className={`boton-wrapper ${
+                  select === "FUNGI" ? "boton-wrapper-select" : ""
+                }`}
               >
                 <img
                   src={fungi}
@@ -236,8 +280,9 @@ export const Principal = () => {
 
             <div className="item-grid">
               <div
-                className={`boton-wrapper ${select === "PLANTAE" ? "boton-wrapper-select" : ""
-                  }`}
+                className={`boton-wrapper ${
+                  select === "PLANTAE" ? "boton-wrapper-select" : ""
+                }`}
               >
                 <img
                   src={plantae}
@@ -258,7 +303,7 @@ export const Principal = () => {
 
           {/* Tarjetas */}
           <div className="tarjeta">
-            <Box sx={{ bgcolor: 'Scrollbar', width: '100%' }}>
+            <Box sx={{ bgcolor: "Scrollbar", width: "100%" }}>
               <AppBar position="static">
                 <Tabs
                   value={value}
@@ -267,7 +312,7 @@ export const Principal = () => {
                   textColor="inherit"
                   variant="fullWidth"
                   aria-label="full width tabs example"
-                  sx={{ bgcolor: 'slategrey' }}
+                  sx={{ bgcolor: "slategrey" }}
                 >
                   <Tab label="ESPECIES" {...a11yProps(0)} />
                   <Tab label="REPORTES" {...a11yProps(1)} />
@@ -279,10 +324,20 @@ export const Principal = () => {
                 <Box>
                   <Grid container spacing={6}>
                     {especies
-                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      .map((item, index) => (
-                        cargarTabla(item.imagen ? encodeURI(String(item.imagen)) : noImage, item.nombre_cientifico, index, item)
-                      ))}
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((item, index) =>
+                        cargarTabla(
+                          item.imagen
+                            ? encodeURI(String(item.imagen))
+                            : noImage,
+                          item.nombre_cientifico,
+                          index,
+                          item
+                        )
+                      )}
                   </Grid>
                   {tablaPagination()}
                 </Box>
@@ -293,10 +348,18 @@ export const Principal = () => {
                 <Box>
                   <Grid container spacing={6}>
                     {reportes
-                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      .map((item, index) => (
-                        cargarTabla(item.imagen ? `${item.imagen}` : noImage, item.especie.nombre_cientifico, index, item)
-                      ))}
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((item, index) =>
+                        cargarTabla(
+                          item.imagen ? `${item.imagen}` : noImage,
+                          item.especie.nombre_cientifico,
+                          index,
+                          item
+                        )
+                      )}
                   </Grid>
                   {tablaPagination()}
                 </Box>
@@ -307,26 +370,35 @@ export const Principal = () => {
 
         {/* Pie de página */}
         <Paper sx={{ bottom: 0, left: 0, right: 0 }} elevation={10}>
-          <BottomNavigation
-            showLabels
-            style={{ backgroundColor: "black" }}
-          >
-            <BottomNavigationAction style={{ color: 'darkgray' }} label="UNTDF" icon={<School />} />
-            <BottomNavigationAction style={{ color: 'darkgray' }} label="Luis Orescovich" icon={<Person />} />
-            <BottomNavigationAction style={{ color: 'darkgray' }} label="Laboratorio de Software" icon={<Edit />} />
-            <BottomNavigationAction style={{ color: 'darkgray' }} label="Ushuaia - TDF" icon={<LocationOn />} />
+          <BottomNavigation showLabels style={{ backgroundColor: "black" }}>
+            <BottomNavigationAction
+              style={{ color: "darkgray" }}
+              label="UNTDF"
+              icon={<School />}
+            />
+            <BottomNavigationAction
+              style={{ color: "darkgray" }}
+              label="Luis Orescovich"
+              icon={<Person />}
+            />
+            <BottomNavigationAction
+              style={{ color: "darkgray" }}
+              label="Laboratorio de Software"
+              icon={<Edit />}
+            />
+            <BottomNavigationAction
+              style={{ color: "darkgray" }}
+              label="Ushuaia - TDF"
+              icon={<LocationOn />}
+            />
           </BottomNavigation>
         </Paper>
       </div>
 
       {/* Clae Modal */}
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
-        <PrincipalModal especie={selectedEspecie} reporte={selectedReporte}/>
+      <Modal open={open} onClose={handleClose}>
+        <PrincipalModal especie={selectedEspecie} reporte={selectedReporte} />
       </Modal>
     </>
-
   );
 };
